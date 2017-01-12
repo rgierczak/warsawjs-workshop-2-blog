@@ -6,4 +6,3 @@
 
 - Instalacja Node.js - https://nodejs.org/en/
 - Stworzenie pliku `package.json` - komenda `npm init`
- 
