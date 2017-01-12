@@ -3,8 +3,9 @@
     
     root.Blog = {
         AddPostView: {},
+        Post: {},
+        PostView: {},
         PostList: {},
-        PostListView: {},
         Storage: {},
         Request: {},
         Templates: {}

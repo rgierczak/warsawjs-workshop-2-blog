@@ -4,10 +4,12 @@
             $.get({
                 url: url,
                 cache: true,
-                success: (template) =>
-                    successCallback(template),
-                error: (message) =>
-                    errorCallback(message)
+                success: (template) => {
+                    successCallback(template);
+                },
+                error: (message) => {
+                    errorCallback(message);
+                }
             });
         }
     };

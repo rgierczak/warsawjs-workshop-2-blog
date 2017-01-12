@@ -19,8 +19,10 @@
         buildEventDetails() {
             let $event = $.Event("addPost");
             $event.detail = {
-                addPostTitle: $('#addPostTitle').val(),
-                addPostBody: $('#addPostBody').val(),
+                id: parseInt(Math.random() * 1000),
+                title: $('#addPostTitle').val(),
+                author: $('#addPostAuthor').val(),
+                body: $('#addPostBody').val(),
             };
             return $event;
         }
