@@ -8,12 +8,15 @@
         }
         
         setupListeners() {
-            this.$submitButton = $('#addFormSubmit');
-            this.$submitButton.click((event) => {
-                event.preventDefault();
-                let $event = this.buildEventDetails();
-                $(document).trigger($event);
+            $('#addFormSubmit').click((event) => {
+                this.buttonClickHandler(event);
             });
+        }
+    
+        buttonClickHandler(event) {
+            event.preventDefault();
+            let $event = this.buildEventDetails();
+            $(document).trigger($event);
         }
     
         buildEventDetails() {
