@@ -28,7 +28,6 @@
         render() {
             let $element = $('#view-container');
             root.Blog.DOMHelper.render(this.template, $element);
-            this.setupListeners();
         }
     }
 

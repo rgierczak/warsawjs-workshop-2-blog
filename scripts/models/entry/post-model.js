@@ -1,9 +1,11 @@
 (function (root) {
     'use strict';
 
-    class PostModel {
+    let EntryModel = root.Blog.EntryModel;
+
+    class PostModel extends EntryModel {
         constructor(data) {
-            this.id = data.id || parseInt(Math.random() * 1000);
+            super(data);
             this.title = data.title;
             this.author = data.author;
             this.body = data.body;

@@ -5,7 +5,7 @@
 
     class PostView extends EntryView {
         constructor(post) {
-            super(post);
+            super();
             this.template = $('#template-post').html();
             this.templateContext = post;
             this.render();

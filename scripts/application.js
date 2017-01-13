@@ -4,7 +4,7 @@
     let $ = root.$;
 
     let PostView = root.Blog.PostView;
-    let AddPostView = root.Blog.AddPostView;
+    let AddFormPostView = root.Blog.AddFormPostView;
 
     let PostModel = root.Blog.PostModel;
     let PostListModel = root.Blog.PostListModel;
@@ -27,7 +27,7 @@
 
         onPostSubmittedHandler(postData) {
             this.createPost(postData);
-            StorageService.setData(this.postList.getPosts(), (payload) => {
+            StorageService.setData(this.postList.getEntries(), (payload) => {
                 console.log(payload);
             });
         }
@@ -35,7 +35,8 @@
         onRouterHomeHandler() {
             console.log('ROUTER: HOME');
             this.clearDOMContainer();
-            new AddPostView();
+            new AddFormPostView();
+            this.postList.clear();
             StorageService.getData((storedPosts) => {
                 storedPosts.forEach((postData) => this.createPost(postData));
             });
@@ -45,7 +46,6 @@
             this.clearDOMContainer();
             let postId = parseInt(event.detail.id);
             this.getPostModelById(postId, (postModel) => {
-                new AddPostView();
                 new PostView(postModel);
                 console.log('ROUTER: POST: ', postModel);
             });
@@ -69,7 +69,7 @@
 
         createPost(postData) {
             let postModel = new PostModel(postData);
-            this.postList.addPost(postModel);
+            this.postList.addEntry(postModel);
             new PostView(postModel);
         }
     }

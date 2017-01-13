@@ -7,9 +7,10 @@
     class AddFormPostView extends AddFormEntryView {
         constructor() {
             super();
-            this.$form = $('#add-post-form');
             this.template = $('#template-add-post').html();
             this.render();
+            this.$form = $('#add-post-form');
+            this.setupListeners();
         }
 
         buildEventDetails() {

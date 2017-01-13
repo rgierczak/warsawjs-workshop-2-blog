@@ -7,9 +7,10 @@
     class AddFormCommentView extends AddFormEntryView {
         constructor() {
             super();
-            this.$form = $('#add-comment-form');
             this.template = $('#template-add-comment').html();
             this.render();
+            this.$form = $('#add-comment-form');
+            this.setupListeners();
         }
     
         buildEventDetails() {

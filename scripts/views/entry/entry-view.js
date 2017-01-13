@@ -2,9 +2,9 @@
     'use strict';
 
     class EntryView {
-        constructor(item) {
-            this.templateContext = item;
-            this.render();
+        constructor() {
+            this.template = null;
+            this.templateContext = null;
         }
 
         render() {
