@@ -1,14 +1,13 @@
 (function (root) {
     'use strict';
-    
+
     class PostView {
         constructor(post) {
             this.templateContext = null;
-            this.templateURL = 'templates/post.hbs';
             this.setTemplateContext(post);
-            this.fetchTemplate();
+            this.render();
         }
-        
+
         setTemplateContext(post) {
             this.templateContext = {
                 "id": post.id,
@@ -17,21 +16,14 @@
                 "body": post.body
             }
         }
-        
-        fetchTemplate() {
-            root.Blog.RequestService.fetchURL(this.templateURL, this.onSuccess.bind(this), this.onError.bind(this));
-        }
-        
-        onSuccess(template) {
-            let $element = $(document.body);
+
+        render() {
+            let template = $('#template-post').html();
+            let $element = $('#view-container');
             let context = this.templateContext;
             root.Blog.DOMHelper.render(template, $element, context);
         }
-        
-        onError(message) {
-            throw new Error('Unable to render Handlebars template: ', message);
-        }
     }
-    
+
     root.Blog.PostView = PostView;
 }(window));

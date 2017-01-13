@@ -3,7 +3,7 @@
 
     class PostModel {
         constructor(data) {
-            this.id = data.id;
+            this.id = data.id || parseInt(Math.random() * 1000);
             this.title = data.title;
             this.author = data.author;
             this.body = data.body;

@@ -1,9 +1,11 @@
 (function (root) {
+    "use strict";
+
     let DOMHelper = {
         render(template, $element, context = null) {
-            let $html = $(template).html();
-            let templateScript = Handlebars.compile($html);
-            $element.append(templateScript(context));
+            let templateCompiled = root.Handlebars.compile(template);
+            let templateScript = templateCompiled(context);
+            $element.append(templateScript);
         }
     };
     

@@ -1,38 +1,26 @@
 (function (root) {
     'use strict';
-    
-    function changeRoute(context) {
-        let event = context.id ? buildEventDetails(context.id) : 'router:home';
-        $(document).trigger(event);
-    }
-    
-    function buildEventDetails(id) {
-        let $event = $.Event("router:post");
-        $event.detail = { id: id };
-        return $event;
-    }
-    
+
+    let $ = root.$;
+
     class Router {
         constructor() {
-            this.router = null;
-            this.setup();
-        }
-        
-        setup() {
             this.router = new root.Routy.Router();
-            this.createPaths();
+            this.setupRoutes();
             this.router.run();
         }
         
-        createPaths() {
+        setupRoutes() {
             this.router
-                .add('/home')
-                .add('/posts/:id')
-                .otherwise('/home')
-                .on('change', (req) => {
-                    let context = { id: req.namedParams.id };
-                    changeRoute(context);
-                });
+                .add('/posts', function () {
+                    $(document).trigger('router:home');
+                })
+                .add('/posts/:id', function (req) {
+                    let $event = $.Event("router:post");
+                    $event.detail = { id: req.namedParams.id };
+                    $(document).trigger($event);
+                })
+                .otherwise('/posts')
         }
     }
     

@@ -13,6 +13,10 @@
         getPost(id) {
             return this.postList.find((post) => post.id === id);
         }
+
+        getPosts() {
+            return this.postList;
+        }
     }
     
     root.Blog.PostListModel = PostListModel;

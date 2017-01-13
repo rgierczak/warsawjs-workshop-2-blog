@@ -1,28 +1,26 @@
 (function (root) {
     'use strict';
-    
+
+    let $ = root.$;
+
     class AddPostView {
         constructor() {
-            this.templateURL = 'templates/add-post.hbs';
-            this.fetchTemplate();
+            this.render();
         }
         
         setupListeners() {
-            $('#addFormSubmit').click((event) => {
-                this.buttonClickHandler(event);
-            });
+            $('#add-post-form').submit((event) => this.submitFormHandler(event));
         }
     
-        buttonClickHandler(event) {
+        submitFormHandler(event) {
             event.preventDefault();
             let $event = this.buildEventDetails();
             $(document).trigger($event);
         }
     
         buildEventDetails() {
-            let $event = $.Event("add-post:clicked");
+            let $event = $.Event("add-post:submitted");
             $event.detail = {
-                id: parseInt(Math.random() * 1000),
                 title: $('#addPostTitle').val(),
                 author: $('#addPostAuthor').val(),
                 body: $('#addPostBody').val(),
@@ -30,19 +28,11 @@
             return $event;
         }
 
-        fetchTemplate() {
-            root.Blog.RequestService.fetchURL(this.templateURL, this.onSuccess.bind(this), this.onError.bind(this));
-        }
-        
-        onSuccess(template) {
-            let $element = $(document.body);
+        render() {
+            let template = $('#template-add-post').html();
+            let $element = $('#view-container');
             root.Blog.DOMHelper.render(template, $element);
-            $(document).trigger('add-post:rendered');
             this.setupListeners();
-        }
-        
-        onError(message) {
-            throw new Error('Unable to render Handlebars template: ', message);
         }
     }
     

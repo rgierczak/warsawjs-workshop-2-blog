@@ -5,6 +5,26 @@
     <title>WarsawJS - Workshop#2</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
+<body>
+    <script id="template-add-post" type="text/x-handlebars-template">
+        <form id="add-post-form">
+            <input id="addPostTitle" type="text" required>
+            <input id="addPostAuthor" type="text" required>
+            <input id="addPostBody" type="text" required>
+            <input type="submit" value="Dodaj">
+        </form>
+    </script>
+
+    <script id="template-post" type="text/x-handlebars-template">
+        <div class="post-body">
+            <div><a href="#/posts/{{id}}">{{title}}</a></div>
+            <div>{{author}}</div>
+            <div>{{body}}</div>
+        </div>
+    </script>
+
+    <div id="view-container"></div>
+
     <script type="text/javascript" src="scripts/libs/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/libs/handlebars.js"></script>
     <script type="text/javascript" src="scripts/libs/Routy.min.js"></script>
