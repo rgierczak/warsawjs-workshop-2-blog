@@ -8,9 +8,9 @@
 <body>
     <script id="template-add-post" type="text/x-handlebars-template">
         <form id="add-post-form">
-            <input id="addPostTitle" type="text" required>
-            <input id="addPostAuthor" type="text" required>
-            <input id="addPostBody" type="text" required>
+            <input id="add-post-title" type="text" required>
+            <input id="add-post-author" type="text" required>
+            <input id="add-post-body" type="text" required>
             <input type="submit" value="Dodaj">
         </form>
     </script>
@@ -18,6 +18,21 @@
     <script id="template-post" type="text/x-handlebars-template">
         <div class="post-body">
             <div><a href="#/posts/{{id}}">{{title}}</a></div>
+            <div>{{author}}</div>
+            <div>{{body}}</div>
+        </div>
+    </script>
+
+    <script id="template-add-comment" type="text/x-handlebars-template">
+        <form id="add-comment-form">
+            <input id="add-comment-author" type="text" required>
+            <input id="add-comment-body" type="text" required>
+            <input type="submit" value="Dodaj">
+        </form>
+    </script>
+
+    <script id="template-comment" type="text/x-handlebars-template">
+        <div class="comment-body">
             <div>{{author}}</div>
             <div>{{body}}</div>
         </div>
