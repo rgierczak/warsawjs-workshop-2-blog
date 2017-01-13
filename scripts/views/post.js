@@ -11,6 +11,7 @@
         
         setTemplateContext(post) {
             this.templateContext = {
+                "id": post.id,
                 "title": post.title,
                 "author": post.author,
                 "body": post.body

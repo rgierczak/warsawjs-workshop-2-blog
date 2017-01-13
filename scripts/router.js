@@ -2,8 +2,14 @@
     'use strict';
     
     function changeRoute(context) {
-        let event = context.id ? 'router:post' : 'router:home';
+        let event = context.id ? buildEventDetails(context.id) : 'router:home';
         $(document).trigger(event);
+    }
+    
+    function buildEventDetails(id) {
+        let $event = $.Event("router:post");
+        $event.detail = { id: id };
+        return $event;
     }
     
     class Router {

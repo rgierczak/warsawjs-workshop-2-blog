@@ -27,27 +27,33 @@
             });
             
             $(document).on('router:home', (event) => {
+                console.log('ROUTER: HOME');
                 new AddPostView();
             });
             
             $(document).on('router:post', (event) => {
-                console.log('ROUTER: post chosen');
+                let postId = parseInt(event.detail.id);
+                let postModel = this.postList.getPost(postId);
+                console.log('ROUTER: POST: ', postModel);
             });
         }
         
         addPostHandler(postData) {
-            let postModel = new PostModel(postData);
-            new PostView(postModel);
-            this.postList.addPost(postModel);
-            StorageService.setData(postModel);
+            StorageService.setData(this.createPost(postData));
         }
     
         displayPosts() {
             let storedPosts = StorageService.getData() || [];
             storedPosts.forEach((postData) => {
-                let postModel = new PostModel(postData);
-                new PostView(postModel);
+                this.createPost(postData);
             });
+        }
+    
+        createPost(postData) {
+            let postModel = new PostModel(postData);
+            this.postList.addPost(postModel);
+            new PostView(postModel);
+            return postModel;
         }
     }
     
