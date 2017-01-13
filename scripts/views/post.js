@@ -18,7 +18,7 @@
         }
         
         fetchTemplate() {
-            root.Blog.Request.fetchURL(this.templateURL, this.onSuccess.bind(this), this.onError.bind(this));
+            root.Blog.RequestService.fetchURL(this.templateURL, this.onSuccess.bind(this), this.onError.bind(this));
         }
     
         render(template) {

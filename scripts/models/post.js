@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    class Post {
+    class PostModel {
         constructor(data) {
             this.id = data.id;
             this.title = data.title;
@@ -10,5 +10,5 @@
         }
     }
     
-    root.Blog.Post = Post;
+    root.Blog.PostModel = PostModel;
 }(window));

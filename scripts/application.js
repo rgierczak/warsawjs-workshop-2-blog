@@ -1,14 +1,17 @@
 (function (root) {
     'use strict';
     
-    let AddPostView = root.Blog.AddPostView;
-    let Post = root.Blog.Post;
-    let PostList = root.Blog.PostList;
     let PostView = root.Blog.PostView;
+    let AddPostView = root.Blog.AddPostView;
+    
+    let PostModel = root.Blog.PostModel;
+    let PostListModel = root.Blog.PostListModel;
+    
+    let StorageService = root.Blog.StorageService;
     
     class Application {
         constructor() {
-            this.postList = new PostList();
+            this.postList = new PostListModel();
             // Sprawdź, czy istnieją posty w LocalStorage. Jeśli tak, wyświetl je w pętli.
             
             new AddPostView();
@@ -22,13 +25,9 @@
         }
         
         addPostHandler(postData) {
-            // Tworzymy nowego posta.
-            let post = new Post(postData);
-            
-            // Dodajemy posta do tablicy postów.
+            let post = new PostModel(postData);
             this.postList.addPost(post);
-            
-            // Wyświetlamy ostatni element z tablicy.
+            StorageService.setData(post);
             this.postView = new PostView(post);
         }
     }

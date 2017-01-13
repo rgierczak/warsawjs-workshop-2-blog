@@ -1,5 +1,5 @@
 (function (root) {
-    let Request = {
+    let RequestService = {
         fetchURL(url, successCallback, errorCallback) {
             $.get({
                 url: url,
@@ -14,5 +14,5 @@
         }
     };
     
-    root.Blog.Request = Request;
+    root.Blog.RequestService = RequestService;
 }(window));

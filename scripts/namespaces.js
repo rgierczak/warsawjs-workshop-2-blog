@@ -3,11 +3,10 @@
     
     root.Blog = {
         AddPostView: {},
-        Post: {},
+        PostModel: {},
         PostView: {},
-        PostList: {},
-        Storage: {},
-        Request: {},
-        Templates: {}
+        PostListModel: {},
+        StorageService: {},
+        RequestService: {},
     };
 }(window));

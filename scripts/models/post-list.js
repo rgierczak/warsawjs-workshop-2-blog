@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
     
-    class PostList {
+    class PostListModel {
         constructor() {
             this.postList = [];
         }
@@ -11,5 +11,5 @@
         }
     }
     
-    root.Blog.PostList = PostList;
+    root.Blog.PostListModel = PostListModel;
 }(window));
