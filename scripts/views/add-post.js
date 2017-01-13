@@ -20,7 +20,7 @@
         }
     
         buildEventDetails() {
-            let $event = $.Event("addPost");
+            let $event = $.Event("add-post:clicked");
             $event.detail = {
                 id: parseInt(Math.random() * 1000),
                 title: $('#addPostTitle').val(),
@@ -37,6 +37,7 @@
         onSuccess(template) {
             let $element = $(document.body);
             root.Blog.DOMHelper.render(template, $element);
+            $(document).trigger('add-post:rendered');
             this.setupListeners();
         }
         

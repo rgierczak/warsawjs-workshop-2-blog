@@ -8,6 +8,7 @@
         PostListModel: {},
         StorageService: {},
         RequestService: {},
-        DOMHelper: {}
+        DOMHelper: {},
+        Router: {}
     };
 }(window));

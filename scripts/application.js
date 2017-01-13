@@ -8,28 +8,30 @@
     let PostListModel = root.Blog.PostListModel;
     
     let StorageService = root.Blog.StorageService;
+    let Router = root.Blog.Router;
     
     class Application {
         constructor() {
-            this.postList = new PostListModel();
-    
-            new AddPostView();
-            this.displayPosts();
             this.setupListeners();
-        }
-        
-        displayPosts() {
-            let storedPosts = StorageService.getData() || [];
-    
-            storedPosts.forEach((postData) => {
-                let postModel = new PostModel(postData);
-                new PostView(postModel);
-            });
+            new Router();
+            this.postList = new PostListModel();
         }
         
         setupListeners() {
-            $(document).on('addPost', (event) => {
+            $(document).on('add-post:clicked', (event) => {
                 this.addPostHandler(event.detail);
+            });
+            
+            $(document).on('add-post:rendered', (event) => {
+                this.displayPosts();
+            });
+            
+            $(document).on('router:home', (event) => {
+                new AddPostView();
+            });
+            
+            $(document).on('router:post', (event) => {
+                console.log('ROUTER: post chosen');
             });
         }
         
@@ -38,6 +40,14 @@
             new PostView(postModel);
             this.postList.addPost(postModel);
             StorageService.setData(postModel);
+        }
+    
+        displayPosts() {
+            let storedPosts = StorageService.getData() || [];
+            storedPosts.forEach((postData) => {
+                let postModel = new PostModel(postData);
+                new PostView(postModel);
+            });
         }
     }
     
