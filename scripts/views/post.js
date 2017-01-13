@@ -20,16 +20,11 @@
         fetchTemplate() {
             root.Blog.RequestService.fetchURL(this.templateURL, this.onSuccess.bind(this), this.onError.bind(this));
         }
-    
-        render(template) {
-            let $body = $(document.body);
-            let $html = $(template).html();
-            let templateScript = Handlebars.compile($html);
-            $body.append(templateScript(this.templateContext));
-        }
         
         onSuccess(template) {
-            this.render(template);
+            let $element = $(document.body);
+            let context = this.templateContext;
+            root.Blog.DOMHelper.render(template, $element, context);
         }
         
         onError(message) {

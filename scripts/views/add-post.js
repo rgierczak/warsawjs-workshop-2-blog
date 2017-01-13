@@ -35,20 +35,13 @@
         }
         
         onSuccess(template) {
-            this.render(template);
+            let $element = $(document.body);
+            root.Blog.DOMHelper.render(template, $element);
             this.setupListeners();
         }
         
         onError(message) {
             throw new Error('Unable to render Handlebars template: ', message);
-        }
-        
-        render(template) {
-            let $body = $(document.body);
-            let $html = $(template).html();
-            let templateScript = Handlebars.compile($html);
-            let context = null;
-            $body.append(templateScript(context));
         }
     }
     
