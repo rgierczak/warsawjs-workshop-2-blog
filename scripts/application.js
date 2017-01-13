@@ -12,10 +12,19 @@
     class Application {
         constructor() {
             this.postList = new PostListModel();
-            // Sprawdź, czy istnieją posty w LocalStorage. Jeśli tak, wyświetl je w pętli.
-            
+    
             new AddPostView();
+            this.displayPosts();
             this.setupListeners();
+        }
+        
+        displayPosts() {
+            let storedPosts = StorageService.getData() || [];
+    
+            storedPosts.forEach((postData) => {
+                let postModel = new PostModel(postData);
+                new PostView(postModel);
+            });
         }
         
         setupListeners() {
@@ -25,10 +34,10 @@
         }
         
         addPostHandler(postData) {
-            let post = new PostModel(postData);
-            this.postList.addPost(post);
-            StorageService.setData(post);
-            this.postView = new PostView(post);
+            let postModel = new PostModel(postData);
+            new PostView(postModel);
+            this.postList.addPost(postModel);
+            StorageService.setData(postModel);
         }
     }
     
