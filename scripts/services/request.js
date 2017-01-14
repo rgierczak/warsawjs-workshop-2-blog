@@ -1,4 +1,8 @@
 (function (root) {
+    'use strict';
+
+    let $ = root.$;
+
     let RequestService = {
         fetchURL(url, successCallback, errorCallback) {
             $.get({
@@ -13,6 +17,6 @@
             });
         }
     };
-    
+
     root.Blog.RequestService = RequestService;
 }(window));

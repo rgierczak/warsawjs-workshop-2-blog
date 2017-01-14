@@ -10,6 +10,6 @@
             this.body = data.body;
         }
     }
-    
+
     root.Blog.CommentModel = CommentModel;
 }(window));

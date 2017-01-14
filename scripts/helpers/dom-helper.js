@@ -1,5 +1,5 @@
 (function (root) {
-    "use strict";
+    'use strict';
 
     let DOMHelper = {
         render(template, $element, context = null) {
@@ -8,6 +8,6 @@
             $element.append(templateScript);
         }
     };
-    
+
     root.Blog.DOMHelper = DOMHelper;
 }(window));

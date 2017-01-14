@@ -15,7 +15,7 @@
         }
 
         buildEventDetails() {
-            let $event = $.Event("add-post:submitted");
+            let $event = $.Event('add-post:submitted');
             $event.detail = {
                 title: $('#add-post-title').val(),
                 author: $('#add-post-author').val(),
@@ -24,6 +24,6 @@
             return $event;
         }
     }
-    
+
     root.Blog.AddFormPostView = AddFormPostView;
 }(window));

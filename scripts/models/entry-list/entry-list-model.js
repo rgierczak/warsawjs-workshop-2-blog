@@ -6,8 +6,9 @@
             this.entryList = [];
         }
 
-        addEntry(comment) {
-            this.entryList.push(comment);
+        addEntry(entry) {
+            this.entryList.push(entry);
+            return entry;
         }
 
         getEntries() {

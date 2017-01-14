@@ -1,6 +1,6 @@
 (function (root) {
     'use strict';
-    
+
     root.Blog = {
         AddFormEntryView: null,
         AddFormPostView: null,

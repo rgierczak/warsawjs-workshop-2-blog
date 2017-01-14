@@ -30,17 +30,62 @@
         }
 
         onPostSubmittedHandler(postData) {
-            this.createPost(postData);
-            this.saveData();
+            let postModel = this._createPostModel(postData);
+            this._renderPostComponent(postModel);
+            this._saveData();
         }
 
-        saveData() {
-            StorageService.setData(this.getPosts(), (payload) => {
-                console.log(payload);
+        _saveData() {
+            StorageService.setData(this._serializePostList());
+        }
+
+        _restorePostList(callback = Function) {
+            this.postList.clear();
+            StorageService.getData((storedPosts) => {
+                storedPosts.forEach((postData) => this._createPostModel(postData));
+                callback();
             });
         }
 
-        getPosts() {
+        onCommentSubmittedHandler(commentData) {
+            let postId = parseInt(commentData.postId);
+            let postModel = this.postList.getEntryById(postId);
+            console.log('Klikniety postmdel : ', postModel);
+            let commentModel = this._createCommentModel(commentData, postModel);
+            this._renderCommentComponent(commentModel);
+            this._saveData();
+        }
+
+        onRouterHomeHandler() {
+            this.clearDOMContainer();
+            new AddFormPostView();
+            this._restorePostList(() => {
+                this.postList.each((postModel) => {
+                    this._renderPostComponent(postModel);
+                })
+            });
+        }
+
+        onRouterPostHandler(event) {
+            this.clearDOMContainer();
+            let postId = parseInt(event.detail.id);
+            this._restorePostList(() => {
+                let postModel = this.postList.getEntryById(postId);
+                this._renderPostComponent(postModel);
+
+                new AddFormCommentView(postId);
+
+                postModel.comments.each((comment) => {
+                    new CommentView(comment);
+                });
+            });
+        }
+
+        clearDOMContainer() {
+            $('#view-container').empty();
+        }
+
+        _serializePostList() {
             let posts = [];
 
             this.postList.getEntries().forEach((post) => {
@@ -62,54 +107,21 @@
             return posts;
         }
 
-        onCommentSubmittedHandler(commentData) {
-            let postId = parseInt(commentData.postId);
-            let postModel = this.postList.getEntryById(postId);
-            console.log('Klikniety postmdel : ', postModel);
-            this.createComment(commentData, postModel);
-            this.saveData();
-        }
-
-        onRouterHomeHandler() {
-            this.clearDOMContainer();
-            new AddFormPostView();
-            this.restorePostList();
-        }
-
-        restorePostList(callback = Function) {
-            this.postList.clear();
-            StorageService.getData((storedPosts) => {
-                storedPosts.forEach((postData) => this.createPost(postData));
-                callback();
-            });
-        }
-
-        onRouterPostHandler(event) {
-            this.clearDOMContainer();
-            let postId = parseInt(event.detail.id);
-            this.restorePostList(() => {
-                new AddFormCommentView(postId);
-
-                let postModel = this.postList.getEntryById(postId);
-                postModel.comments.each((comment) => {
-                    new CommentView(comment);
-                });
-            });
-        }
-
-        clearDOMContainer() {
-            $('#view-container').empty();
-        }
-
-        createPost(postData) {
+        _createPostModel(postData) {
             let postModel = new PostModel(postData);
-            this.postList.addEntry(postModel);
+            return this.postList.addEntry(postModel);
+        }
+
+        _renderPostComponent(postModel) {
             new PostView(postModel);
         }
 
-        createComment(commentData, postModel) {
+        _createCommentModel(commentData, postModel) {
             let commentModel = new CommentModel(commentData);
-            postModel.comments.addEntry(commentModel);
+            return postModel.comments.addEntry(commentModel);
+        }
+
+        _renderCommentComponent(commentModel) {
             new CommentView(commentModel);
         }
     }

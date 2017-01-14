@@ -1,6 +1,7 @@
 (function (root) {
     'use strict';
 
+    let $ = root.$;
     let EntryView = root.Blog.EntryView;
 
     class CommentView extends EntryView {

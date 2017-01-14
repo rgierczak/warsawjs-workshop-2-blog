@@ -5,6 +5,6 @@
 
     class PostListModel extends EntryListModel {
     }
-    
+
     root.Blog.PostListModel = PostListModel;
 }(window));

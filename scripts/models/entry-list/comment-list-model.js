@@ -9,6 +9,6 @@
             this.entryList = comments || [];
         }
     }
-    
+
     root.Blog.CommentListModel = CommentListModel;
 }(window));

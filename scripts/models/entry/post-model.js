@@ -13,6 +13,6 @@
             this.comments = new CommentListModel(data.comments);
         }
     }
-    
+
     root.Blog.PostModel = PostModel;
 }(window));

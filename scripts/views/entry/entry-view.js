@@ -1,6 +1,8 @@
 (function (root) {
     'use strict';
 
+    let $ = root.$;
+
     class EntryView {
         constructor() {
             this.template = null;

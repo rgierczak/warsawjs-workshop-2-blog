@@ -1,8 +1,12 @@
 (function (root) {
-    "use strict";
+    'use strict';
+
+    function emptyFunction() {
+        // Happy coding!
+    }
 
     let StorageService = {
-        setData(storedData, callback) {
+        setData(storedData, callback = emptyFunction) {
             console.warn('StorageService#setData', storedData);
             localStorage.setItem('posts', JSON.stringify(storedData));
             callback({ status: 'OK' });

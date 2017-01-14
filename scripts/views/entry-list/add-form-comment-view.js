@@ -16,7 +16,7 @@
         }
     
         buildEventDetails() {
-            let $event = $.Event("add-comment:submitted");
+            let $event = $.Event('add-comment:submitted');
             $event.detail = {
                 postId: this.postId,
                 author: $('#add-comment-author').val(),
