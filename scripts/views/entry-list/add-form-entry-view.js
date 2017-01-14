@@ -19,12 +19,6 @@
             $(document).trigger($event);
         }
 
-        buildEventDetails(name, detail) {
-            let $event = $.Event(name);
-            $event.detail = detail;
-            return $event;
-        }
-
         render() {
             let $element = $('#view-container');
             root.Blog.DOMHelper.render(this.template, $element);
