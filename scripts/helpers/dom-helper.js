@@ -6,6 +6,10 @@
             let templateCompiled = root.Handlebars.compile(template);
             let templateScript = templateCompiled(context);
             $element.append(templateScript);
+        },
+    
+        clearDOMContainer() {
+            $('#view-container').empty();
         }
     };
 

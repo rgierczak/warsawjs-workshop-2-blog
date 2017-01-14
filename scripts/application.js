@@ -2,6 +2,7 @@
     'use strict';
 
     let $ = root.$;
+    let DOMHelper = root.Blog.DOMHelper;
 
     let PostView = root.Blog.PostView;
     let AddFormPostView = root.Blog.AddFormPostView;
@@ -50,14 +51,13 @@
         onCommentSubmittedHandler(commentData) {
             let postId = parseInt(commentData.postId);
             let postModel = this.postList.getEntryById(postId);
-            console.log('Klikniety postmdel : ', postModel);
             let commentModel = this._createCommentModel(commentData, postModel);
             this._renderCommentComponent(commentModel);
             this._saveData();
         }
 
         onRouterHomeHandler() {
-            this.clearDOMContainer();
+            DOMHelper.clearDOMContainer();
             new AddFormPostView();
             this._restorePostList(() => {
                 this.postList.each((postModel) => {
@@ -67,7 +67,7 @@
         }
 
         onRouterPostHandler(event) {
-            this.clearDOMContainer();
+            DOMHelper.clearDOMContainer();
             let postId = parseInt(event.detail.id);
             this._restorePostList(() => {
                 let postModel = this.postList.getEntryById(postId);
@@ -79,10 +79,6 @@
                     new CommentView(comment);
                 });
             });
-        }
-
-        clearDOMContainer() {
-            $('#view-container').empty();
         }
 
         _serializePostList() {
