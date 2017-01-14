@@ -31,53 +31,90 @@
         }
 
         onPostSubmittedHandler(postData) {
+            // 1) Stworzenie modelu Posta.
             let postModel = this._createPostModel(postData);
+            
+            // 2) Wyrenderowanie Posta.
             this._renderPostComponent(postModel);
+            
+            // 3) Zapisanie Posta do bazy danych.
             this._saveData();
         }
 
-        _saveData() {
-            StorageService.setData(this._serializePostList());
-        }
-
-        _restorePostList(callback = Function) {
-            this.postList.clear();
-            StorageService.getData((storedPosts) => {
-                storedPosts.forEach((postData) => this._createPostModel(postData));
-                callback();
-            });
-        }
-
         onCommentSubmittedHandler(commentData) {
+            // 1) Pobranie id posta, którego komentarze chcemy wyświetlić.
             let postId = parseInt(commentData.postId);
+            
+            // 2) Pobrać model posta z listy postów.
             let postModel = this.postList.getEntryById(postId);
+            
+            // 3) Stworzyć model komentarza.
             let commentModel = this._createCommentModel(commentData, postModel);
+            
+            // 4) Wyrenderować komponent z komentarzem.
             this._renderCommentComponent(commentModel);
+            
+            // 5) Zapisać dane do bazy danych.
             this._saveData();
         }
 
         onRouterHomeHandler() {
+            // 1) Wyczyszczenie kontenera DOM
             DOMHelper.clearDOMContainer();
+            
+            // 2) Wyświetlenie formularza dodawania nowego postu.
             new AddFormPostView();
+            
+            // 3) Aktualizacja listy postów
             this._restorePostList(() => {
                 this.postList.each((postModel) => {
+                    
+                    // 4) Wyrenderowanie postów na podstawie modeli
                     this._renderPostComponent(postModel);
                 })
             });
         }
 
         onRouterPostHandler(event) {
+            // 1) Wyczyszczenie kontenera DOM do którego wstrzykujemy widok.
             DOMHelper.clearDOMContainer();
+            
+            // 2) Pobranie id posta, którego chcemy wyświetlić.
             let postId = parseInt(event.detail.id);
+            
+            // 3) Uaktualnienie listy postów.
             this._restorePostList(() => {
+                
+                // 4) Pobranie z tablicy postów modelu postu o klikniętym id.
                 let postModel = this.postList.getEntryById(postId);
+                
+                // 5) Wyrenderowanie komponentu posta na podstawie modelu.
                 this._renderPostComponent(postModel);
 
+                // 6) Dodanie do widoku formularza dodawania komentarzy.
                 new AddFormCommentView(postId);
 
+                // 7) Wyświetlenie (ewentualnych) komentarzy posta.
                 postModel.comments.each((comment) => {
                     new CommentView(comment);
                 });
+            });
+        }
+    
+        _saveData() {
+            StorageService.setData(this._serializePostList());
+        }
+    
+        _restorePostList(callback = Function) {
+            // 1) wyczyszczenie tablicy postList
+            this.postList.clear();
+            
+            // 2) Pobranie danych z bazy danych
+            StorageService.getData((storedPosts) => {
+                
+                // 3) Stworzenie modeli postów
+                storedPosts.forEach((postData) => this._createPostModel(postData));
+                callback();
             });
         }
 

@@ -8,9 +8,17 @@
         constructor() {
             console.log('AddFormPostView');
             super();
+            
+            // 1) Pobrać template z DOM.
             this.template = $('#template-add-post').html();
+            
+            // 2) Wyrenderować template.
             this.render();
+            
+            // 3) Pobrać referencję do formularza.
             this.$form = $('#add-post-form');
+            
+            // 4) Ustawić listenery na submit tego formularza.
             this.setupListeners();
         }
 
